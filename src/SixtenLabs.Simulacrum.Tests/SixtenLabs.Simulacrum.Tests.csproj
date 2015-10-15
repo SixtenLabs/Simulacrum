@@ -80,12 +80,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
-      <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
-      <Name>SixtenLabs.Simulacrum</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Processors\" />
     <Folder Include="Simulators\" />
   </ItemGroup>
