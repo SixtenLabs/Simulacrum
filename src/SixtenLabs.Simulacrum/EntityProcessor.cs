@@ -48,7 +48,7 @@ namespace SixtenLabs.Simulacrum
 		/// </summary>
 		protected IDictionary<Type, IComponent> Components { get; } = new Dictionary<Type, IComponent>();
 
-		public BitSet ComponentTypeMask { get; } = new BitSet();
+		public Aspect ComponentTypeMask { get; } = new Aspect();
 
 		/// <summary>
 		/// These component types are required by this system and 

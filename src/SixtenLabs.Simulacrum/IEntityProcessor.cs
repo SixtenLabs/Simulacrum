@@ -17,7 +17,7 @@ namespace SixtenLabs.Simulacrum
 		/// </summary>
 		List<Type> OptionalComponentTypes { get; }
 
-		BitSet ComponentTypeMask { get; }
+		Aspect ComponentTypeMask { get; }
 
 		int Order { get; }
 

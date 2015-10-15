@@ -3,9 +3,10 @@
 namespace SixtenLabs.Simulacrum
 {
 	/// <summary>
+	/// A signature of Component types that a Processor requires to process an Entity.
 	/// A resizable collection of bits.
 	/// </summary>
-	public class BitSet
+	public class Aspect
 	{
 		const int BitSize = (sizeof(uint) * 8) - 1;
 		const int ByteSize = 5;  // log_2(BitSize + 1)
@@ -13,9 +14,9 @@ namespace SixtenLabs.Simulacrum
 		uint[] bits;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="BitSet"/> class.
+		/// Initializes a new instance of the <see cref="Aspect"/> class.
 		/// </summary>
-		public BitSet()
+		public Aspect()
 		{
 			bits = new uint[1];
 		}
@@ -95,7 +96,7 @@ namespace SixtenLabs.Simulacrum
 		/// </summary>
 		/// <param name="other">The bitset to check.</param>
 		/// <returns><c>true</c> if all of the bits in this instance are set in <paramref name="other"/>; otherwise, <c>false</c>.</returns>
-		public bool IsSubsetOf(BitSet other)
+		public bool IsSubsetOf(Aspect other)
 		{
 			if (other == null)
 			{

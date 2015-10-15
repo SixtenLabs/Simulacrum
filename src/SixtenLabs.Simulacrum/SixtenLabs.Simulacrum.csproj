@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitSet.cs" />
+    <Compile Include="Aspect.cs" />
     <Compile Include="Bucket.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="EntityHandle.cs" />

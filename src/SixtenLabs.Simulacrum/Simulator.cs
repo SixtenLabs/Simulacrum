@@ -60,7 +60,7 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		public IList<EntityHandle> GetHandlesForProcessor(BitSet processorComponentMask)
+		public IList<EntityHandle> GetHandlesForProcessor(Aspect processorComponentMask)
 		{
 			return Handles.Where(x => processorComponentMask.IsSubsetOf(x.ComponentTypesMask)).ToList();
 		}

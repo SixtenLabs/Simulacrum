@@ -28,7 +28,7 @@ namespace SixtenLabs.Simulacrum
 
 		void Load();
 
-		IList<EntityHandle> GetHandlesForProcessor(BitSet processorComponentMask);
+		IList<EntityHandle> GetHandlesForProcessor(Aspect processorComponentMask);
 
 
 		int Order { get; set; }

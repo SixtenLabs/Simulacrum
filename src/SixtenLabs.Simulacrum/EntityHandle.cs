@@ -48,7 +48,7 @@ namespace SixtenLabs.Simulacrum
 		/// <summary>
 		/// 
 		/// </summary>
-		public BitSet ComponentTypesMask { get; } = new BitSet();
+		public Aspect ComponentTypesMask { get; } = new Aspect();
 
 		/// <summary>
 		/// 
