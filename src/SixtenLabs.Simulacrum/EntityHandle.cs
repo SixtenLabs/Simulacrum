@@ -32,7 +32,7 @@ namespace SixtenLabs.Simulacrum
 
 		public void RemoveComponentTypeMask(int componentTypeMask)
 		{
-			ComponentTypesMask.ClearBit(componentTypeMask);
+			ComponentTypesMask.SetBit(componentTypeMask, false);
 		}
 
 		/// <summary>

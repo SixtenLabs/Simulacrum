@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace SixtenLabs.Simulacrum
 {
@@ -11,14 +12,14 @@ namespace SixtenLabs.Simulacrum
 		const int BitSize = (sizeof(uint) * 8) - 1;
 		const int ByteSize = 5;  // log_2(BitSize + 1)
 
-		uint[] bits;
+		private BitArray Bits { get; } = new BitArray(1);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Aspect"/> class.
 		/// </summary>
-		public Aspect()
+		public Aspect(int size = 6)
 		{
-			bits = new uint[1];
+			Bits = new BitArray(size);
 		}
 
 		/// <summary>
@@ -28,46 +29,31 @@ namespace SixtenLabs.Simulacrum
 		/// <returns><c>true</c> if the bit is set; otherwise, <c>false</c>.</returns>
 		public bool IsSet(int index)
 		{
-			int b = index >> ByteSize;
-
-			if (b >= bits.Length)
+			if(Bits.Length <= index)
 			{
 				return false;
 			}
 
-			return (bits[b] & (1 << (index & BitSize))) != 0;
+			return Bits[index];
+		}
+
+		public bool GetBit(int index)
+		{
+			return Bits.Get(index);
 		}
 
 		/// <summary>
 		/// Sets the bit at the given index.
 		/// </summary>
 		/// <param name="index">The bit to set.</param>
-		public void SetBit(int index)
+		public void SetBit(int index, bool value = true)
 		{
-			int b = index >> ByteSize;
-
-			if (b >= bits.Length)
+			if (Bits.Length <= index)
 			{
-				Array.Resize(ref bits, b + 1);
+				Bits.Length = Bits.Length + 1;
 			}
 
-			bits[b] |= 1u << (index & BitSize);
-		}
-
-		/// <summary>
-		/// Clears the bit at the given index.
-		/// </summary>
-		/// <param name="index">The bit to clear.</param>
-		public void ClearBit(int index)
-		{
-			int b = index >> ByteSize;
-
-			if (b >= bits.Length)
-			{
-				return;
-			}
-
-			bits[b] &= ~(1u << (index & BitSize));
+			Bits.Set(index, value);
 		}
 
 		/// <summary>
@@ -75,12 +61,7 @@ namespace SixtenLabs.Simulacrum
 		/// </summary>
 		public void SetAll()
 		{
-			int count = bits.Length;
-
-			for (int i = 0; i < count; i++)
-			{
-				bits[i] = 0xffffffff;
-			}
+			Bits.SetAll(true);
 		}
 
 		/// <summary>
@@ -88,7 +69,7 @@ namespace SixtenLabs.Simulacrum
 		/// </summary>
 		public void ClearAll()
 		{
-			Array.Clear(bits, 0, bits.Length);
+			Bits.SetAll(false);
 		}
 
 		/// <summary>
@@ -98,36 +79,56 @@ namespace SixtenLabs.Simulacrum
 		/// <returns><c>true</c> if all of the bits in this instance are set in <paramref name="other"/>; otherwise, <c>false</c>.</returns>
 		public bool IsSubsetOf(Aspect other)
 		{
-			if (other == null)
+			var tempSet = new Aspect();
+
+			for (int i = 0; i < Bits.Count; i++)
 			{
-				throw new ArgumentNullException("other");
-			}
-
-			var otherBits = other.bits;
-			int count = Math.Min(bits.Length, otherBits.Length);
-
-			for (int i = 0; i < count; i++)
-			{
-				uint bit = bits[i];
-
-				if ((bit & otherBits[i]) != bit)
-				{
-					return false;
-				}
-			}
-
-			// handle extra bits on our side that might just be all zero
-			int extra = bits.Length - count;
-
-			for (int i = count; i < extra; i++)
-			{
-				if (bits[i] != 0)
+				if (Bits.Get(i) && (!(other.GetBit(i))))
 				{
 					return false;
 				}
 			}
 
 			return true;
+		}
+
+		public Aspect Union(Aspect aSet)
+		{
+			var tempSet = new Aspect();
+
+			for (int i = 0; i < Bits.Count; i++)
+			{
+				var value = (Bits[i] || aSet.GetBit(i));
+				tempSet.SetBit(i, value); 
+			}
+
+			return tempSet;
+		}
+
+		public Aspect Intersection(Aspect aSet)
+		{
+			var tempSet = new Aspect();
+
+			for (int i = 0; i < Bits.Count; i++)
+			{
+				var value = (Bits[i] && aSet.GetBit(i));
+				tempSet.SetBit(i, value);
+			}
+
+			return tempSet;
+		}
+
+		public Aspect Difference(Aspect aSet)
+		{
+			var tempSet = new Aspect();
+
+			for (int i = 0; i < Bits.Count; i++)
+			{
+				var value = (Bits[i] && (!(aSet.GetBit(i))));
+				tempSet.SetBit(i, value); 
+			}
+
+			return tempSet;
 		}
 	}
 }

@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspectTests.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +83,12 @@
   <ItemGroup>
     <Folder Include="Processors\" />
     <Folder Include="Simulators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
+      <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
+      <Name>SixtenLabs.Simulacrum</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
