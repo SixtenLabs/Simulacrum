@@ -27,12 +27,12 @@ namespace SixtenLabs.Simulacrum
 
 		public void AddComponentTypeMask(int componentTypeMask)
 		{
-			ComponentTypesMask.SetBit(componentTypeMask);
+			Aspect.SetBit(componentTypeMask);
 		}
 
 		public void RemoveComponentTypeMask(int componentTypeMask)
 		{
-			ComponentTypesMask.SetBit(componentTypeMask, false);
+			Aspect.SetBit(componentTypeMask, false);
 		}
 
 		/// <summary>
@@ -48,7 +48,7 @@ namespace SixtenLabs.Simulacrum
 		/// <summary>
 		/// 
 		/// </summary>
-		public Aspect ComponentTypesMask { get; } = new Aspect();
+		public Aspect Aspect { get; } = new Aspect();
 
 		/// <summary>
 		/// 
