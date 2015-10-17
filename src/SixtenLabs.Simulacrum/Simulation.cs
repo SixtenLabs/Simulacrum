@@ -92,7 +92,7 @@ namespace SixtenLabs.Simulacrum
 				foreach (var type in entitySystem.RequiredComponentTypes)
 				{
 					var maskIndex = ComponentDictionary[type];
-					entitySystem.ComponentTypeMask.SetBit(maskIndex);
+					entitySystem.ComponentTypeMask.Add(maskIndex);
 				}
 
 				foreach (var type in entitySystem.OptionalComponentTypes)
@@ -111,7 +111,7 @@ namespace SixtenLabs.Simulacrum
 				foreach (var type in entitySystem.RequiredComponentTypes)
 				{
 					var maskIndex = ComponentDictionary[type];
-					entitySystem.ComponentTypeMask.SetBit(maskIndex);
+					entitySystem.ComponentTypeMask.Add(maskIndex);
 				}
 
 				foreach (var type in entitySystem.OptionalComponentTypes)

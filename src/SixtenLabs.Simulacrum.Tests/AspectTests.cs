@@ -42,11 +42,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(0)]
 		[InlineData(1)]
 		[InlineData(2)]
-		public void SetBit_PositiveIndex_BitIsSet(int indexToTest)
+		public void Set_PositiveIndex_BitIsSet(int indexToTest)
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(indexToTest);
+			subject.Add(indexToTest);
 
 			subject.IsSet(indexToTest).Should().BeTrue();
 		}
@@ -54,11 +54,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
-		public void SetBit_NegativeIndex_ThrowsException(int indexToTest)
+		public void Set_NegativeIndex_ThrowsException(int indexToTest)
 		{
 			var subject = NewSubjectUnderTest();
 
-			Action act = () => subject.SetBit(indexToTest);
+			Action act = () => subject.Add(indexToTest);
 
 			act.ShouldThrow<ArgumentOutOfRangeException>();
 		}
@@ -71,7 +71,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(indexToTest, false);
+			subject.Remove(indexToTest);
 
 			subject.IsSet(indexToTest).Should().BeFalse();
 		}
@@ -84,9 +84,9 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(indexToTest);
+			subject.Add(indexToTest);
 			subject.IsSet(indexToTest).Should().BeTrue();
-			subject.SetBit(indexToTest, false);
+			subject.Remove(indexToTest);
 
 			subject.IsSet(indexToTest).Should().BeFalse();
 		}
@@ -98,7 +98,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			Action act = () => subject.SetBit(indexToTest, false);
+			Action act = () => subject.Remove(indexToTest);
 
 			act.ShouldThrow<ArgumentOutOfRangeException>();
 		}
@@ -108,11 +108,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(0);
-			subject.SetBit(1);
-			subject.SetBit(2);
-			subject.SetBit(3);
-			//subject.SetBit(int.MaxValue);
+			subject.Add(0);
+			subject.Add(1);
+			subject.Add(2);
+			subject.Add(3);
+			//subject.Set(int.MaxValue);
 
 			subject.ClearAll();
 
@@ -128,10 +128,10 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(0);
-			subject.SetBit(1);
-			subject.SetBit(2);
-			subject.SetBit(3);
+			subject.Add(0);
+			subject.Add(1);
+			subject.Add(2);
+			subject.Add(3);
 
 			subject.ClearAll();
 
@@ -159,14 +159,14 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.SetBit(index1);
-			subject.SetBit(index2);
+			subject.Add(index1);
+			subject.Add(index2);
 
 			var aspect = NewSubjectUnderTest();
 
-			aspect.SetBit(index3);
-			aspect.SetBit(index4);
-			aspect.SetBit(index5);
+			aspect.Add(index3);
+			aspect.Add(index4);
+			aspect.Add(index5);
 
 			var actual = subject.IsSubsetOf(aspect);
 

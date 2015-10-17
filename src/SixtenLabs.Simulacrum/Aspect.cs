@@ -9,17 +9,26 @@ namespace SixtenLabs.Simulacrum
 	/// </summary>
 	public class Aspect
 	{
-		const int BitSize = (sizeof(uint) * 8) - 1;
-		const int ByteSize = 5;  // log_2(BitSize + 1)
-
-		private BitArray Bits { get; } = new BitArray(1);
-
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Aspect"/> class.
 		/// </summary>
 		public Aspect(int size = 6)
 		{
 			Bits = new BitArray(size);
+		}
+
+		/// <summary>
+		/// Sets the bit at the given index.
+		/// </summary>
+		/// <param name="index">The bit to set.</param>
+		private void Set(int index, bool value)
+		{
+			if (Bits.Length <= index)
+			{
+				Bits.Length = Bits.Length + 1;
+			}
+
+			Bits.Set(index, value);
 		}
 
 		/// <summary>
@@ -42,18 +51,14 @@ namespace SixtenLabs.Simulacrum
 			return Bits.Get(index);
 		}
 
-		/// <summary>
-		/// Sets the bit at the given index.
-		/// </summary>
-		/// <param name="index">The bit to set.</param>
-		public void SetBit(int index, bool value = true)
+		public void Add(int index)
 		{
-			if (Bits.Length <= index)
-			{
-				Bits.Length = Bits.Length + 1;
-			}
+			Set(index, true);
+		}
 
-			Bits.Set(index, value);
+		public void Remove(int index)
+		{
+			Set(index, false);
 		}
 
 		/// <summary>
@@ -99,7 +104,7 @@ namespace SixtenLabs.Simulacrum
 			for (int i = 0; i < Bits.Count; i++)
 			{
 				var value = (Bits[i] || aSet.GetBit(i));
-				tempSet.SetBit(i, value); 
+				tempSet.Set(i, value); 
 			}
 
 			return tempSet;
@@ -112,7 +117,7 @@ namespace SixtenLabs.Simulacrum
 			for (int i = 0; i < Bits.Count; i++)
 			{
 				var value = (Bits[i] && aSet.GetBit(i));
-				tempSet.SetBit(i, value);
+				tempSet.Set(i, value);
 			}
 
 			return tempSet;
@@ -125,10 +130,12 @@ namespace SixtenLabs.Simulacrum
 			for (int i = 0; i < Bits.Count; i++)
 			{
 				var value = (Bits[i] && (!(aSet.GetBit(i))));
-				tempSet.SetBit(i, value); 
+				tempSet.Set(i, value); 
 			}
 
 			return tempSet;
 		}
+
+		private BitArray Bits { get; }
 	}
 }
