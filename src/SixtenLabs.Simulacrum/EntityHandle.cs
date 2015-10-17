@@ -7,8 +7,9 @@ namespace SixtenLabs.Simulacrum
 	{
 		private static int nextIndex;
 
-		public EntityHandle(Guid entity)
+		public EntityHandle(Guid entity, int aspectSize)
 		{
+			Aspect = new Aspect(aspectSize);
 			Entity = entity;
 			GetIndex();
 		}
@@ -27,12 +28,12 @@ namespace SixtenLabs.Simulacrum
 
 		public void AddComponentTypeMask(int componentTypeMask)
 		{
-			Aspect.Add(componentTypeMask);
+			Aspect.AddMask(componentTypeMask);
 		}
 
 		public void RemoveComponentTypeMask(int componentTypeMask)
 		{
-			Aspect.Remove(componentTypeMask);
+			Aspect.RemoveMask(componentTypeMask);
 		}
 
 		/// <summary>
@@ -48,7 +49,7 @@ namespace SixtenLabs.Simulacrum
 		/// <summary>
 		/// 
 		/// </summary>
-		public Aspect Aspect { get; } = new Aspect();
+		public Aspect Aspect { get; set; }
 
 		/// <summary>
 		/// 

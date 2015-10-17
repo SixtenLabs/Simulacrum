@@ -7,21 +7,20 @@ namespace SixtenLabs.Simulacrum.Tests
 {
 	public class AspectTests
 	{
-		private Aspect NewSubjectUnderTest()
+		private Aspect NewSubjectUnderTest(int size)
 		{
-			return new Aspect();
+			return new Aspect(size);
 		}
 
 		[Theory]
 		[InlineData(0)]
 		[InlineData(1)]
 		[InlineData(2)]
-		[InlineData(int.MaxValue)]
 		public void IsSet_NoBitsSet_ReturnsFalse(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(3);
 
-			var actual = subject.IsSet(indexToTest);
+			var actual = subject.HasMask(indexToTest);
 
 			actual.Should().BeFalse();
 		}
@@ -29,11 +28,13 @@ namespace SixtenLabs.Simulacrum.Tests
 		[Theory]
 		[InlineData(int.MinValue)]
 		[InlineData(-1)]
-		public void IsSet_NegativeIndex_ThrowsException(int indexToTest)
+		[InlineData(5)]
+		[InlineData(int.MaxValue)]
+		public void IsSet_IndexOutOfRange_ThrowsException(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(5);
 
-			Action act = () => subject.IsSet(indexToTest);
+			Action act = () => subject.HasMask(indexToTest);
 
 			act.ShouldThrow<ArgumentOutOfRangeException>();
 		}
@@ -44,11 +45,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(2)]
 		public void Set_PositiveIndex_BitIsSet(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(3);
 
-			subject.Add(indexToTest);
+			subject.AddMask(indexToTest);
 
-			subject.IsSet(indexToTest).Should().BeTrue();
+			subject.HasMask(indexToTest).Should().BeTrue();
 		}
 
 		[Theory]
@@ -56,9 +57,9 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(-1)]
 		public void Set_NegativeIndex_ThrowsException(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(1);
 
-			Action act = () => subject.Add(indexToTest);
+			Action act = () => subject.AddMask(indexToTest);
 
 			act.ShouldThrow<ArgumentOutOfRangeException>();
 		}
@@ -69,11 +70,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(2)]
 		public void ClearBit_NoBitsSet_ReturnsFalse(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(3);
 
-			subject.Remove(indexToTest);
+			subject.RemoveMask(indexToTest);
 
-			subject.IsSet(indexToTest).Should().BeFalse();
+			subject.HasMask(indexToTest).Should().BeFalse();
 		}
 
 		[Theory]
@@ -82,13 +83,13 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(2)]
 		public void ClearBit_BitsSet_ReturnsFalse(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(3);
 
-			subject.Add(indexToTest);
-			subject.IsSet(indexToTest).Should().BeTrue();
-			subject.Remove(indexToTest);
+			subject.AddMask(indexToTest);
+			subject.HasMask(indexToTest).Should().BeTrue();
+			subject.RemoveMask(indexToTest);
 
-			subject.IsSet(indexToTest).Should().BeFalse();
+			subject.HasMask(indexToTest).Should().BeFalse();
 		}
 
 		[Theory]
@@ -96,57 +97,11 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(-1)]
 		public void ClearBit_NegativeIndex_ThrowsException(int indexToTest)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(1);
 
-			Action act = () => subject.Remove(indexToTest);
+			Action act = () => subject.RemoveMask(indexToTest);
 
 			act.ShouldThrow<ArgumentOutOfRangeException>();
-		}
-
-		[Fact]
-		public void ClearAll_BitsSet_AllBitsEmpty()
-		{
-			var subject = NewSubjectUnderTest();
-
-			subject.Add(0);
-			subject.Add(1);
-			subject.Add(2);
-			subject.Add(3);
-			//subject.Set(int.MaxValue);
-
-			subject.ClearAll();
-
-			subject.IsSet(0).Should().BeFalse();
-			subject.IsSet(1).Should().BeFalse();
-			subject.IsSet(2).Should().BeFalse();
-			subject.IsSet(3).Should().BeFalse();
-			subject.IsSet(int.MaxValue).Should().BeFalse();
-		}
-
-		[Fact]
-		public void SetAll_BitsSet_AllBitsSet()
-		{
-			var subject = NewSubjectUnderTest();
-
-			subject.Add(0);
-			subject.Add(1);
-			subject.Add(2);
-			subject.Add(3);
-
-			subject.ClearAll();
-
-			subject.IsSet(0).Should().BeFalse();
-			subject.IsSet(1).Should().BeFalse();
-			subject.IsSet(2).Should().BeFalse();
-			subject.IsSet(3).Should().BeFalse();
-			subject.IsSet(int.MaxValue).Should().BeFalse();
-
-			subject.SetAll();
-
-			subject.IsSet(0).Should().BeTrue();
-			subject.IsSet(1).Should().BeTrue();
-			subject.IsSet(2).Should().BeTrue();
-			subject.IsSet(3).Should().BeTrue();
 		}
 
 		[Theory]
@@ -157,20 +112,31 @@ namespace SixtenLabs.Simulacrum.Tests
 		[InlineData(1, 5, 3, 4, 5, false)]
 		public void IsSubSetOf_WhenCalled_ReturnsCorrectResult(int index1, int index2, int index3, int index4, int index5, bool result)
 		{
-			var subject = NewSubjectUnderTest();
+			var subject = NewSubjectUnderTest(6);
 
-			subject.Add(index1);
-			subject.Add(index2);
+			subject.AddMask(index1);
+			subject.AddMask(index2);
 
-			var aspect = NewSubjectUnderTest();
+			var aspect = NewSubjectUnderTest(6);
 
-			aspect.Add(index3);
-			aspect.Add(index4);
-			aspect.Add(index5);
+			aspect.AddMask(index3);
+			aspect.AddMask(index4);
+			aspect.AddMask(index5);
 
 			var actual = subject.IsSubsetOf(aspect);
 
 			actual.Should().Be(result);
+		}
+
+		[Fact]
+		public void Constructor_AllBits_False()
+		{
+			var subject = NewSubjectUnderTest(4);
+
+			subject.HasMask(0).Should().BeFalse();
+			subject.HasMask(1).Should().BeFalse();
+			subject.HasMask(2).Should().BeFalse();
+			subject.HasMask(3).Should().BeFalse();
 		}
 	}
 }

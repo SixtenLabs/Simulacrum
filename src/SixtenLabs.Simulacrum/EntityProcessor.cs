@@ -5,23 +5,15 @@ namespace SixtenLabs.Simulacrum
 {
 	public abstract class EntityProcessor : IEntityProcessor
 	{
-		public EntityProcessor(IEnumerable<IComponent> components)
+		public EntityProcessor(IComponentManager componentManager)
 		{
+			ComponentManager = componentManager;
+
 			RegisterRequiredComponents();
 			RegisterOptionalComponents();
 
-			SetComponents(components);
-
 			SetupSystemProperties();
 			SetupComponentProperties();
-		}
-
-		private void SetComponents(IEnumerable<IComponent> components)
-		{
-			foreach (var component in components)
-			{
-				Components.Add(component.GetType(), component);
-			}
 		}
 
 		protected abstract void SetupSystemProperties();
@@ -41,14 +33,9 @@ namespace SixtenLabs.Simulacrum
 			Console.WriteLine(string.Format("{0} - {1} Loaded.", Order, Name));
 		}
 
-		/// <summary>
-		/// This is a collection of all registered components in the entire simulation.
-		/// While each system will usually only access a few components they have access to any component.
-		/// 
-		/// </summary>
-		protected IDictionary<Type, IComponent> Components { get; } = new Dictionary<Type, IComponent>();
+		protected IComponentManager ComponentManager { get; }
 
-		public Aspect ComponentTypeMask { get; } = new Aspect();
+		public Aspect Aspect { get; set; }
 
 		/// <summary>
 		/// These component types are required by this system and 

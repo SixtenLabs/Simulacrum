@@ -10,21 +10,12 @@ namespace SixtenLabs.Simulacrum
 	/// </summary>
 	public abstract class Simulator : ISimulator
 	{
-		public Simulator(IEnumerable<IComponent> components)
+		public Simulator(IComponentManager componentManager)
 		{
-			AddComponents(components);
 			SetupProperties();
 		}
 
 		protected abstract void SetupProperties();
-
-		private void AddComponents(IEnumerable<IComponent> components)
-		{
-			foreach (var component in components)
-			{
-				Components.Add(component.GetType(), component);
-			}
-		}
 
 		public abstract void Load();
 
@@ -35,14 +26,12 @@ namespace SixtenLabs.Simulacrum
 		/// <returns></returns>
 		public T GetComponent<T>() where T : class, IComponent
 		{
-			var component = Components[typeof(T)];
-
-			return component as T;
+			return ComponentManager.GetComponent<T>();
 		}
 
 		public EntityHandle CreateEntity()
 		{
-			var handle = new EntityHandle(Guid.NewGuid());
+			var handle = new EntityHandle(Guid.NewGuid(), ComponentManager.ComponentCount);
 
 			Handles.Add(handle);
 
@@ -53,11 +42,7 @@ namespace SixtenLabs.Simulacrum
 		{
 			Handles.Remove(handle);
 			EntityHandle.UsedIndexPool.Enqueue(handle.Index);
-
-			foreach (var component in Components)
-			{
-				component.Value.Delete(handle.Index);
-			}
+			ComponentManager.DeleteComponentValues(handle.Index);
 		}
 
 		public IList<EntityHandle> GetHandlesForProcessor(Aspect aspect)
@@ -71,7 +56,7 @@ namespace SixtenLabs.Simulacrum
 
 		private IList<EntityHandle> Handles { get; } = new List<EntityHandle>();
 
-		public IDictionary<Type, IComponent> Components { get; } = new Dictionary<Type, IComponent>();
+		public IComponentManager ComponentManager { get; }
 
 		public int Order { get; set; }
 

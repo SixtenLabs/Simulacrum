@@ -43,10 +43,12 @@
     <Compile Include="Aspect.cs" />
     <Compile Include="Bucket.cs" />
     <Compile Include="Component.cs" />
+    <Compile Include="ComponentManager.cs" />
     <Compile Include="EntityHandle.cs" />
     <Compile Include="EntityProcessor.cs" />
     <Compile Include="EntityProcessorType.cs" />
     <Compile Include="IComponent.cs" />
+    <Compile Include="IComponentManager.cs" />
     <Compile Include="IEntityProcessor.cs" />
     <Compile Include="ISimulation.cs" />
     <Compile Include="ISimulator.cs" />
