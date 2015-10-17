@@ -31,7 +31,7 @@ namespace SixtenLabs.Simulacrum
 
 		public EntityHandle CreateEntity()
 		{
-			var handle = new EntityHandle(Guid.NewGuid(), ComponentManager.ComponentCount);
+			var handle = new EntityHandle(Guid.NewGuid(), ComponentManager.Count);
 
 			Handles.Add(handle);
 

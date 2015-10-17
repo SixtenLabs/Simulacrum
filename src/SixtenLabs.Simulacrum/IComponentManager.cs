@@ -8,9 +8,12 @@ namespace SixtenLabs.Simulacrum
 {
 	public interface IComponentManager
 	{
-		int ComponentMask(Type componentType);
+		int AspectMask(Type componentType);
 
-		int ComponentCount { get; }
+		/// <summary>
+		/// The count of all the components.
+		/// </summary>
+		int Count { get; }
 
 		T GetComponent<T>() where T : class, IComponent;
 

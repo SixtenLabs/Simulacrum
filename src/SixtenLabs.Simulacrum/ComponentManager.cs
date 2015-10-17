@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SixtenLabs.Simulacrum
 {
@@ -17,33 +14,9 @@ namespace SixtenLabs.Simulacrum
 		{
 			foreach (var component in components)
 			{
-				var componentType = component.GetType();
-        var mask = RegisterComponentType(componentType);
-				component.ComponentTypeMask = mask;
-				Components.Add(componentType, component);
+				component.AspectMask = Components.Count;
+				Components.Add(component.GetType(), component);
 			}
-		}
-
-		/// <summary>
-		/// Each component has to be registered.
-		/// </summary>
-		/// <param name="componentType"></param>
-		/// <returns>ComponentTypeMask bit (if -1 is returned it is not a valid mask (means we already added it)</returns>
-		private int RegisterComponentType(Type componentType)
-		{
-			int mask = -1;
-
-			if (!Registry.Keys.Contains(componentType))
-			{
-				mask = Registry.Count + 1;
-				Registry.Add(componentType, mask);
-			}
-			else
-			{
-				mask = Registry[componentType];
-			}
-
-			return mask;
 		}
 
 		/// <summary>
@@ -58,11 +31,15 @@ namespace SixtenLabs.Simulacrum
 			return component as T;
 		}
 
-		public int ComponentMask(Type componentType)
+		public int AspectMask(Type componentType)
 		{
-			return Registry[componentType];
+			return Components[componentType].AspectMask;
 		}
 
+		/// <summary>
+		/// TODO : revisit testing after finishing refactoring the Bucket.cs class.
+		/// </summary>
+		/// <param name="index"></param>
 		public void DeleteComponentValues(int index)
 		{
 			foreach (var component in Components)
@@ -71,15 +48,16 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		public int ComponentCount
+		/// <summary>
+		/// The count of all the components.
+		/// </summary>
+		public int Count
 		{
 			get
 			{
-				return Registry.Count;
+				return Components.Count;
 			}
 		}
-
-		private IDictionary<Type, int> Registry { get; } = new Dictionary<Type, int>();
 
 		private IDictionary<Type, IComponent> Components { get; } = new Dictionary<Type, IComponent>();
 	}

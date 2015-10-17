@@ -20,7 +20,7 @@
 		/// <summary>
 		/// This is set by Simulation.cs when the component is registered.
 		/// </summary>
-		int ComponentTypeMask { get; set; }
+		int AspectMask { get; set; }
 
 		void Delete(int index);
 	}

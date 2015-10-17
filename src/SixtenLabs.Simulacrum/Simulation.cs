@@ -59,14 +59,9 @@ namespace SixtenLabs.Simulacrum
 			{
 				foreach (var componentType in entitySystem.RequiredComponentTypes)
 				{
-					var maskIndex = ComponentManager.ComponentMask(componentType);
+					var maskIndex = ComponentManager.AspectMask(componentType);
 					entitySystem.Aspect.AddMask(maskIndex);
 				}
-
-				//foreach (var type in entitySystem.OptionalComponentTypes)
-				//{
-				//	RegisterComponentType(type);
-				//}
 
 				UpdateSystems.Add(entitySystem);
 			}
@@ -76,18 +71,13 @@ namespace SixtenLabs.Simulacrum
 		{
 			if (!RenderSystems.Contains(entitySystem))
 			{
-				entitySystem.Aspect = new Aspect(ComponentManager.ComponentCount);
+				entitySystem.Aspect = new Aspect(ComponentManager.Count);
 
 				foreach (var componentType in entitySystem.RequiredComponentTypes)
 				{
-					var maskIndex = ComponentManager.ComponentMask(componentType);
+					var maskIndex = ComponentManager.AspectMask(componentType);
 					entitySystem.Aspect.AddMask(maskIndex);
 				}
-
-				//foreach (var type in entitySystem.OptionalComponentTypes)
-				//{
-				//	RegisterComponentType(type);
-				//}
 
 				RenderSystems.Add(entitySystem);
 			}
