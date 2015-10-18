@@ -45,6 +45,15 @@ namespace SixtenLabs.Simulacrum
 			ComponentManager.DeleteComponentValues(handle.Index);
 		}
 
+		/// <summary>
+		/// Using the aspect from the calling processor we check is this aspect is a subset
+		/// of each entityHandle owned by this simulator.
+		/// 
+		/// This will ensure that the processor only has to process those entities that match
+		/// its aspect.
+		/// </summary>
+		/// <param name="aspect"></param>
+		/// <returns></returns>
 		public IList<EntityHandle> GetHandlesForProcessor(Aspect aspect)
 		{
 			return Handles.Where(x => aspect.IsSubsetOf(x.Aspect)).ToList();

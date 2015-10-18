@@ -16,12 +16,12 @@ namespace SixtenLabs.Simulacrum.Tests.Components
 			CurrentRotationSpeed.Remove(index);
 		}
 
-		public Bucket<float> RunSpeed { get; } = new Bucket<float>();
+		public Bag<float> RunSpeed { get; } = new Bag<float>();
 
-		public Bucket<float> TurnSpeed { get; } = new Bucket<float>();
+		public Bag<float> TurnSpeed { get; } = new Bag<float>();
 
-		public Bucket<Vector3> CurrentMoveBy { get; } = new Bucket<Vector3>();
+		public Bag<Vector3> CurrentMoveBy { get; } = new Bag<Vector3>();
 
-		public Bucket<float> CurrentRotationSpeed { get; } = new Bucket<float>();
+		public Bag<float> CurrentRotationSpeed { get; } = new Bag<float>();
 	}
 }

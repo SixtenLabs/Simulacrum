@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aspect.cs" />
-    <Compile Include="Bucket.cs" />
+    <Compile Include="Bag.cs" />
+    <Compile Include="BagEnumerator.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentManager.cs" />
     <Compile Include="EntityHandle.cs" />

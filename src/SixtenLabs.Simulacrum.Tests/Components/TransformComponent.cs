@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Simulacrum.Tests.Components
 {
-	public class TransformComponent : Component
+	public sealed class TransformComponent : Component
 	{
 		public override void Delete(int index)
 		{
@@ -16,19 +16,10 @@ namespace SixtenLabs.Simulacrum.Tests.Components
 			Scale.Remove(index);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Bucket<Vector3> Position { get; } = new Bucket<Vector3>();
+		public Bag<Vector3> Position { get; } = new Bag<Vector3>();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Bucket<Quaternion> Orientation { get; } = new Bucket<Quaternion>();
+		public Bag<Quaternion> Orientation { get; } = new Bag<Quaternion>();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public Bucket<Vector3> Scale { get; } = new Bucket<Vector3>();
+		public Bag<Vector3> Scale { get; } = new Bag<Vector3>();
 	}
 }
