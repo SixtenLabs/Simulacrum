@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,7 +32,7 @@ namespace SixtenLabs.Simulacrum
 
 		public EntityHandle CreateEntity()
 		{
-			var handle = new EntityHandle(Guid.NewGuid(), ComponentManager.Count);
+			var handle = new EntityHandle(Guid.NewGuid(), NextIndex, ComponentManager.Count);
 
 			Handles.Add(handle);
 
@@ -41,7 +42,7 @@ namespace SixtenLabs.Simulacrum
 		public void DeleteEntity(EntityHandle handle)
 		{
 			Handles.Remove(handle);
-			EntityHandle.UsedIndexPool.Enqueue(handle.Index);
+			UsedIndexPool.Enqueue(handle.Index);
 			ComponentManager.DeleteComponentValues(handle.Index);
 		}
 
@@ -70,5 +71,26 @@ namespace SixtenLabs.Simulacrum
 		public int Order { get; set; }
 
 		public string Name { get; set; }
+
+		private static int nextIndex;
+
+		private int NextIndex
+		{
+			get
+			{
+				int index;
+				var result = UsedIndexPool.TryDequeue(out index);
+
+				if (!result)
+				{
+					index = nextIndex;
+					nextIndex++;
+				}
+
+				return index;
+			}
+		}
+
+		public static ConcurrentQueue<int> UsedIndexPool { get; } = new ConcurrentQueue<int>();
 	}
 }

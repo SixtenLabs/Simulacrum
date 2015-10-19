@@ -1,45 +1,24 @@
 ﻿using System;
-using System.Collections.Concurrent;
 
 namespace SixtenLabs.Simulacrum
 {
-	public class EntityHandle
+	/// <summary>
+	/// An Entity Handle is as close as we get to actually having an entity. 
+	/// The handle holds the ID of the entity, an lookup index, and an Aspect Mask.
+	/// </summary>
+	public struct EntityHandle
 	{
-		private static int nextIndex;
-
-		public EntityHandle(Guid entity, int aspectSize)
+		public EntityHandle(Guid entity, int index, int aspectSize)
 		{
 			Aspect = new Aspect(aspectSize);
 			Entity = entity;
-			GetIndex();
-		}
-
-		private void GetIndex()
-		{
-			int index;
-			var result = UsedIndexPool.TryDequeue(out index);
-
-			if (!result)
-			{
-				Index = nextIndex;
-				nextIndex++;
-			}
-		}
-
-		public void AddComponentTypeMask(int componentTypeMask)
-		{
-			Aspect.AddMask(componentTypeMask);
-		}
-
-		public void RemoveComponentTypeMask(int componentTypeMask)
-		{
-			Aspect.RemoveMask(componentTypeMask);
+			Index = index;
 		}
 
 		/// <summary>
 		/// This index is used for any components that belong to this entity.
 		/// </summary>
-		public int Index { get; set; }
+		public int Index { get; }
 
 		/// <summary>
 		/// A unique ID that tags each game-object as a separate item
@@ -47,13 +26,8 @@ namespace SixtenLabs.Simulacrum
 		public Guid Entity { get; }
 
 		/// <summary>
-		/// 
+		/// This is used to identify if this entity is a candidate to be processed by a processor.
 		/// </summary>
-		public Aspect Aspect { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static ConcurrentQueue<int> UsedIndexPool { get; } = new ConcurrentQueue<int>();
+		public Aspect Aspect { get; }
 	}
 }
