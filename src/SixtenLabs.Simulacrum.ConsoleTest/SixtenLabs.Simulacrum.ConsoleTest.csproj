@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5E966D88-BB3C-4788-9AED-17B741C8214D}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{5BFCE6A7-5391-4174-9125-9F7824B99584}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SixtenLabs.Simulacrum.SampleImplementation</RootNamespace>
-    <AssemblyName>SixtenLabs.Simulacrum.SampleImplementation</AssemblyName>
+    <RootNamespace>SixtenLabs.Simulacrum.ConsoleTest</RootNamespace>
+    <AssemblyName>SixtenLabs.Simulacrum.ConsoleTest</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,16 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\TransformComponent.cs" />
-    <Compile Include="Components\VelocityComponent.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Processors\" />
-    <Folder Include="Simulators\" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
+    <ProjectReference Include="..\SixtenLabs.Simulacrum.SampleImplementation\SixtenLabs.Simulacrum.SampleImplementation.csproj">
+      <Project>{5e966d88-bb3c-4788-9aed-17b741c8214d}</Project>
+      <Name>SixtenLabs.Simulacrum.SampleImplementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
       <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
       <Name>SixtenLabs.Simulacrum</Name>
     </ProjectReference>
