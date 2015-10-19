@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using FluentAssertions;
 
-using SixtenLabs.Simulacrum.Tests.Components;
+using SixtenLabs.Simulacrum.SampleImplementation;
 
 namespace SixtenLabs.Simulacrum.Tests
 {
@@ -38,13 +38,5 @@ namespace SixtenLabs.Simulacrum.Tests
 
 			actual.Should().NotBeNull();
 		}
-
-		//[Fact]
-		//public void DeleteComponentValues_Returns_CorrectNumberOfComponents()
-		//{
-		//	var subject = NewSubjectUnderTest(4);
-
-		//	subject.DeleteComponentValues(1);
-		//}
 	}
 }

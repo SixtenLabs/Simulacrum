@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixtenLabs.Simulacrum", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixtenLabs.Simulacrum.Tests", "src\SixtenLabs.Simulacrum.Tests\SixtenLabs.Simulacrum.Tests.csproj", "{9B1A349A-4E7A-433D-938B-90D90EE932B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixtenLabs.Simulacrum.SampleImplementation", "SixtenLabs.Simulacrum.SampleImplementation\SixtenLabs.Simulacrum.SampleImplementation.csproj", "{5E966D88-BB3C-4788-9AED-17B741C8214D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SixtenLabs.Simulacrum.ConsoleTest", "SixtenLabs.Simulacrum.ConsoleTest\SixtenLabs.Simulacrum.ConsoleTest.csproj", "{5BFCE6A7-5391-4174-9125-9F7824B99584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9B1A349A-4E7A-433D-938B-90D90EE932B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B1A349A-4E7A-433D-938B-90D90EE932B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B1A349A-4E7A-433D-938B-90D90EE932B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E966D88-BB3C-4788-9AED-17B741C8214D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E966D88-BB3C-4788-9AED-17B741C8214D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E966D88-BB3C-4788-9AED-17B741C8214D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E966D88-BB3C-4788-9AED-17B741C8214D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BFCE6A7-5391-4174-9125-9F7824B99584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFCE6A7-5391-4174-9125-9F7824B99584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFCE6A7-5391-4174-9125-9F7824B99584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFCE6A7-5391-4174-9125-9F7824B99584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

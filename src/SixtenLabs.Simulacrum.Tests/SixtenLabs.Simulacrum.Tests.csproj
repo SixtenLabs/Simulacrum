@@ -76,19 +76,18 @@
     <Compile Include="AspectTests.cs" />
     <Compile Include="BagTests.cs" />
     <Compile Include="ComponentManagerTests.cs" />
-    <Compile Include="Components\TransformComponent.cs" />
-    <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="EntityHandleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Processors\" />
-    <Folder Include="Simulators\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\SixtenLabs.Simulacrum.SampleImplementation\SixtenLabs.Simulacrum.SampleImplementation.csproj">
+      <Project>{5e966d88-bb3c-4788-9aed-17b741c8214d}</Project>
+      <Name>SixtenLabs.Simulacrum.SampleImplementation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
       <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
       <Name>SixtenLabs.Simulacrum</Name>
