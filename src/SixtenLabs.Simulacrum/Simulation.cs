@@ -11,24 +11,24 @@ namespace SixtenLabs.Simulacrum
 	/// </summary>
 	public sealed class Simulation : ISimulation
 	{
-		public Simulation(IComponentManager componentManager, IEnumerable<IEntityProcessor> entitySystems, IEnumerable<ISimulator> simulators)
+		public Simulation(IComponentManager componentManager, IEnumerable<IEntityProcessor> entityProcessors, IEnumerable<ISimulator> simulators)
 		{
 			ComponentManager = componentManager;
-			RegisterEntitySystems(entitySystems);
+			RegisterEntityProcessors(entityProcessors);
 			RegisterSimulators(simulators);
 		}
 
-		private void RegisterEntitySystems(IEnumerable<IEntityProcessor> entitySystems)
+		private void RegisterEntityProcessors(IEnumerable<IEntityProcessor> processors)
 		{
-			foreach (var entitySystem in entitySystems.OrderBy(x => x.Order))
+			foreach (var processor in processors.OrderBy(x => x.Order))
 			{
-				if (entitySystem.EntitySystemType == EntityProcessorType.Update)
+				if (processor.EntitySystemType == EntityProcessorType.Update)
 				{
-					RegisterUpdateSystem(entitySystem);
+					RegisterUpdateProcessor(processor);
 				}
-				else if (entitySystem.EntitySystemType == EntityProcessorType.Render)
+				else if (processor.EntitySystemType == EntityProcessorType.Render)
 				{
-					RegisterRenderSystem(entitySystem);
+					RegisterRenderProcessor(processor);
 				}
 			}
 		}
@@ -53,33 +53,35 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		private void RegisterUpdateSystem(IEntityProcessor entitySystem)
+		private void RegisterUpdateProcessor(IEntityProcessor processor)
 		{
-			if (!UpdateSystems.Contains(entitySystem))
+			if (!UpdateProcessors.Contains(processor))
 			{
-				foreach (var componentType in entitySystem.RequiredComponentTypes)
+				processor.Aspect = new Aspect(ComponentManager.Count);
+
+				foreach (var componentType in processor.RequiredComponentTypes)
 				{
 					var maskIndex = ComponentManager.AspectMask(componentType);
-					entitySystem.Aspect.AddMask(maskIndex);
+					processor.Aspect.AddMask(maskIndex);
 				}
 
-				UpdateSystems.Add(entitySystem);
+				UpdateProcessors.Add(processor);
 			}
 		}
 
-		private void RegisterRenderSystem(IEntityProcessor entitySystem)
+		private void RegisterRenderProcessor(IEntityProcessor processor)
 		{
-			if (!RenderSystems.Contains(entitySystem))
+			if (!RenderProcessors.Contains(processor))
 			{
-				entitySystem.Aspect = new Aspect(ComponentManager.Count);
+				
 
-				foreach (var componentType in entitySystem.RequiredComponentTypes)
+				foreach (var componentType in processor.RequiredComponentTypes)
 				{
 					var maskIndex = ComponentManager.AspectMask(componentType);
-					entitySystem.Aspect.AddMask(maskIndex);
+					processor.Aspect.AddMask(maskIndex);
 				}
 
-				RenderSystems.Add(entitySystem);
+				RenderProcessors.Add(processor);
 			}
 		}
 
@@ -105,12 +107,12 @@ namespace SixtenLabs.Simulacrum
 
 		public void Load()
 		{
-			foreach (var updateSystem in UpdateSystems)
+			foreach (var updateSystem in UpdateProcessors)
 			{
 				updateSystem.Load();
 			}
 
-			foreach (var renderSystem in RenderSystems)
+			foreach (var renderSystem in RenderProcessors)
 			{
 				renderSystem.Load();
 			}
@@ -128,7 +130,7 @@ namespace SixtenLabs.Simulacrum
 
 		public void Update(double tick)
 		{
-			foreach (var processor in UpdateSystems)
+			foreach (var processor in UpdateProcessors)
 			{
 				foreach (var simulator in ActiveSimulators)
 				{
@@ -139,7 +141,7 @@ namespace SixtenLabs.Simulacrum
 
 		public void Render(double tick)
 		{
-			foreach (var processor in RenderSystems)
+			foreach (var processor in RenderProcessors)
 			{
 				foreach (var simulator in ActiveSimulators)
 				{
@@ -150,12 +152,12 @@ namespace SixtenLabs.Simulacrum
 
 		public void Dispose()
 		{
-			foreach (var updateSystem in UpdateSystems)
+			foreach (var updateSystem in UpdateProcessors)
 			{
 				updateSystem.Dispose();
 			}
 
-			foreach (var renderSystem in RenderSystems)
+			foreach (var renderSystem in RenderProcessors)
 			{
 				renderSystem.Dispose();
 			}
@@ -166,9 +168,9 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		private IList<IEntityProcessor> UpdateSystems { get; } = new List<IEntityProcessor>();
+		private IList<IEntityProcessor> UpdateProcessors { get; } = new List<IEntityProcessor>();
 
-		private IList<IEntityProcessor> RenderSystems { get; } = new List<IEntityProcessor>();
+		private IList<IEntityProcessor> RenderProcessors { get; } = new List<IEntityProcessor>();
 
 		private IComponentManager ComponentManager { get; }
 
