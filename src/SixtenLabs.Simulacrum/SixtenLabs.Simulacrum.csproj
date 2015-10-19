@@ -41,9 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aspect.cs" />
+    <Compile Include="Bag.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="ComponentManager.cs" />
-    <Compile Include="ConcurrentPool.cs" />
     <Compile Include="EntityHandle.cs" />
     <Compile Include="EntityProcessor.cs" />
     <Compile Include="EntityProcessorType.cs" />

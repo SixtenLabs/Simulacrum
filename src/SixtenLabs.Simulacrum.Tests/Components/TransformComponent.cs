@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
 namespace SixtenLabs.Simulacrum.Tests.Components
 {
@@ -17,10 +11,10 @@ namespace SixtenLabs.Simulacrum.Tests.Components
 			//Scale.Remove(index);
 		}
 
-		public ConcurrentBag<Vector3> Position { get; } = new ConcurrentBag<Vector3>();
+		public Bag<Vector3> Position { get; } = new Bag<Vector3>();
 
-		public ConcurrentBag<Quaternion> Orientation { get; } = new ConcurrentBag<Quaternion>();
+		public Bag<Quaternion> Orientation { get; } = new Bag<Quaternion>();
 
-		public ConcurrentBag<Vector3> Scale { get; } = new ConcurrentBag<Vector3>();
+		public Bag<Vector3> Scale { get; } = new Bag<Vector3>();
 	}
 }

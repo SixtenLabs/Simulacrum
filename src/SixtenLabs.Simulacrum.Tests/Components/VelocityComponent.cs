@@ -1,14 +1,9 @@
-﻿using System.Collections.Concurrent;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace SixtenLabs.Simulacrum.Tests.Components
 {
-	public class VelocityComponent : Component
+	public sealed class VelocityComponent : Component
 	{
-		public VelocityComponent()
-		{
-		}
-
 		public override void Delete(int index)
 		{
 			//RunSpeed.Remove(index);
@@ -17,12 +12,12 @@ namespace SixtenLabs.Simulacrum.Tests.Components
 			//CurrentRotationSpeed.Remove(index);
 		}
 
-		public ConcurrentBag<float> RunSpeed { get; } = new ConcurrentBag<float>();
+		public Bag<float> RunSpeed { get; } = new Bag<float>();
 
-		public ConcurrentBag<float> TurnSpeed { get; } = new ConcurrentBag<float>();
+		public Bag<float> TurnSpeed { get; } = new Bag<float>();
 
-		public ConcurrentBag<Vector3> CurrentMoveBy { get; } = new ConcurrentBag<Vector3>();
+		public Bag<Vector3> CurrentMoveBy { get; } = new Bag<Vector3>();
 
-		public ConcurrentBag<float> CurrentRotationSpeed { get; } = new ConcurrentBag<float>();
+		public Bag<float> CurrentRotationSpeed { get; } = new Bag<float>();
 	}
 }
