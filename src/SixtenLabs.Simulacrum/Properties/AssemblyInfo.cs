@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SixtenLabs.Simulacrum")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A pure Entity Component System in C# for game engines or simulations.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Sixten Labs")]
 [assembly: AssemblyProduct("SixtenLabs.Simulacrum")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

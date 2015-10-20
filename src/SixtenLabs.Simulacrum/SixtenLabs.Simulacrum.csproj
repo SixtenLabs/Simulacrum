@@ -76,6 +76,9 @@
     <Compile Include="Simulation.cs" />
     <Compile Include="Simulator.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SixtenLabs.Simulacrum.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
