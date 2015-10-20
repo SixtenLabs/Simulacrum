@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/SixtenLabs/Simulacrum</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>This is early release. Not ready for production.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>ECS Entity Component System</tags>
   </metadata>
