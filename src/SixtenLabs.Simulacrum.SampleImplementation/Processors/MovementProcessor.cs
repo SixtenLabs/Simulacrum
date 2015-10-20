@@ -2,8 +2,8 @@
 {
 	public class MovementProcessor : EntityProcessor
 	{
-		public MovementProcessor(IComponentManager componentManager)
-      : base(componentManager)
+		public MovementProcessor(IComponentManagerFactory componentManagerFactory)
+      : base(componentManagerFactory)
     {
 		}
 

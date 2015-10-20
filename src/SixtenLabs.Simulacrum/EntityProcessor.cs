@@ -5,9 +5,9 @@ namespace SixtenLabs.Simulacrum
 {
 	public abstract class EntityProcessor : IEntityProcessor
 	{
-		public EntityProcessor(IComponentManager componentManager)
+		public EntityProcessor(IComponentManagerFactory componentManagerFactory)
 		{
-			ComponentManager = componentManager;
+			ComponentManager = componentManagerFactory.CreateComponentManager();
 
 			RegisterRequiredComponents();
 			RegisterOptionalComponents();

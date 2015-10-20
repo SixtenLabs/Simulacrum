@@ -46,7 +46,8 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			Container = new Container();
 
 			Container.RegisterSingleton<ISimulation, Simulation>();
-			Container.Register<IComponentManager, ComponentManager>();
+			//Container.Register<IComponentManager, ComponentManager>();
+			Container.RegisterSingleton<IComponentManagerFactory, ComponentManagerFactory>();
 			//Container.RegisterSingleton<ILog, ConsoleLog>();
 
 			RegisterComponents();
@@ -56,6 +57,8 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			Container.Verify();
 
 			Console.WriteLine("Bootstrap Verified");
+
+			Console.ReadLine();
 		}
 
 		private static Container Container;

@@ -2,8 +2,8 @@
 {
 	public class LevelSimulator : Simulator
 	{
-		public LevelSimulator(IComponentManager componentManager)
-			: base(componentManager)
+		public LevelSimulator(IComponentManagerFactory componentManagerFactory)
+			: base(componentManagerFactory)
 		{
 
 		}

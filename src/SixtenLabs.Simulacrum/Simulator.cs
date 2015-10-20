@@ -11,8 +11,9 @@ namespace SixtenLabs.Simulacrum
 	/// </summary>
 	public abstract class Simulator : ISimulator
 	{
-		public Simulator(IComponentManager componentManager)
+		public Simulator(IComponentManagerFactory componentManagerFactory)
 		{
+			ComponentManager = componentManagerFactory.CreateComponentManager();
 			SetupProperties();
 		}
 

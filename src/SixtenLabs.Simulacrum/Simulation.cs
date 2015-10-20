@@ -11,9 +11,9 @@ namespace SixtenLabs.Simulacrum
 	/// </summary>
 	public sealed class Simulation : ISimulation
 	{
-		public Simulation(IComponentManager componentManager, IEnumerable<IEntityProcessor> entityProcessors, IEnumerable<ISimulator> simulators)
+		public Simulation(IComponentManagerFactory componentManagerFactory, IEnumerable<IEntityProcessor> entityProcessors, IEnumerable<ISimulator> simulators)
 		{
-			ComponentManager = componentManager;
+			ComponentManager = componentManagerFactory.CreateComponentManager();
 			RegisterEntityProcessors(entityProcessors);
 			RegisterSimulators(simulators);
 		}
