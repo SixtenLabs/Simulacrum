@@ -6,9 +6,9 @@ namespace SixtenLabs.Simulacrum.SampleImplementation
 	{
 		public override void Delete(int index)
 		{
-			//Position[0].cle.Remove(index);
-			//Orientation.Remove(index);
-			//Scale.Remove(index);
+			Position.Delete(index);
+			Orientation.Delete(index);
+			Scale.Delete(index);
 		}
 
 		public Bag<Vector3> Position { get; } = new Bag<Vector3>();

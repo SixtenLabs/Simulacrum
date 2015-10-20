@@ -40,6 +40,11 @@ namespace SixtenLabs.Simulacrum
 			return handle;
 		}
 
+		/// <summary>
+		/// This will remove the entity handle and put the index it used into a pool for reuse.
+		/// All components in the component manage will have their values for this indexes cleared (set to default)
+		/// </summary>
+		/// <param name="handle"></param>
 		public void DeleteEntity(EntityHandle handle)
 		{
 			Handles.Remove(handle);
@@ -73,7 +78,7 @@ namespace SixtenLabs.Simulacrum
 
 		public string Name { get; set; }
 
-		private static int nextIndex;
+		private int nextIndex;
 
 		private int NextIndex
 		{
@@ -92,6 +97,6 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		public static ConcurrentQueue<int> UsedIndexPool { get; } = new ConcurrentQueue<int>();
+		private ConcurrentQueue<int> UsedIndexPool { get; } = new ConcurrentQueue<int>();
 	}
 }

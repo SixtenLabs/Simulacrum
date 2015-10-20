@@ -28,6 +28,6 @@ namespace SixtenLabs.Simulacrum
 
 		void Load();
 
-		EntityProcessorType EntitySystemType { get; }
+		EntityProcessorType EntityProcessorType { get; }
 	}
 }

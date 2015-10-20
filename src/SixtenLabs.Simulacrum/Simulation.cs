@@ -5,7 +5,7 @@ using System.Linq;
 namespace SixtenLabs.Simulacrum
 {
 	/// <summary>
-	/// A simulation manages multiple simlators.
+	/// A simulation manages multiple simulators.
 	/// 
 	/// Each contained simulator is independent but is updated by the same entity systems.
 	/// </summary>
@@ -22,11 +22,11 @@ namespace SixtenLabs.Simulacrum
 		{
 			foreach (var processor in processors.OrderBy(x => x.Order))
 			{
-				if (processor.EntitySystemType == EntityProcessorType.Update)
+				if (processor.EntityProcessorType == EntityProcessorType.Update)
 				{
 					RegisterUpdateProcessor(processor);
 				}
-				else if (processor.EntitySystemType == EntityProcessorType.Render)
+				else if (processor.EntityProcessorType == EntityProcessorType.Render)
 				{
 					RegisterRenderProcessor(processor);
 				}
@@ -41,10 +41,6 @@ namespace SixtenLabs.Simulacrum
 			}
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="simulator"></param>
 		private void RegisterSimulator(ISimulator simulator)
 		{
 			if (!Simulators.Contains(simulator))
@@ -73,7 +69,7 @@ namespace SixtenLabs.Simulacrum
 		{
 			if (!RenderProcessors.Contains(processor))
 			{
-				
+				processor.Aspect = new Aspect(ComponentManager.Count);
 
 				foreach (var componentType in processor.RequiredComponentTypes)
 				{

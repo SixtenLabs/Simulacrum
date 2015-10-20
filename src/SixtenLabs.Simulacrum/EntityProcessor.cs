@@ -30,6 +30,7 @@ namespace SixtenLabs.Simulacrum
 
 		public virtual void Load()
 		{
+			// TODO : Replace with logging
 			Console.WriteLine(string.Format("{0} - {1} Loaded.", Order, Name));
 		}
 
@@ -51,7 +52,7 @@ namespace SixtenLabs.Simulacrum
 
 		public int Order { get; protected set; }
 
-		public EntityProcessorType EntitySystemType { get; protected set; }
+		public EntityProcessorType EntityProcessorType { get; protected set; }
 
 		public string Name { get; protected set; }
 	}

@@ -6,10 +6,10 @@ namespace SixtenLabs.Simulacrum.SampleImplementation
 	{
 		public override void Delete(int index)
 		{
-			//RunSpeed.Remove(index);
-			//TurnSpeed.Remove(index);
-			//CurrentMoveBy.Remove(index);
-			//CurrentRotationSpeed.Remove(index);
+			RunSpeed.Delete(index);
+			TurnSpeed.Delete(index);
+			CurrentMoveBy.Delete(index);
+			CurrentRotationSpeed.Delete(index);
 		}
 
 		public Bag<float> RunSpeed { get; } = new Bag<float>();

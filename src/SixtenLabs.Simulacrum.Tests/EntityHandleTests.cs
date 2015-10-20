@@ -45,7 +45,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		public void Performance_SpinUp10000_LessThan200ms()
 		{
 			Action someAction = () => SpinUpABunchOfEntityHandles(100000);
-      someAction.ExecutionTime().ShouldNotExceed(200.Milliseconds());
+      someAction.ExecutionTime().ShouldNotExceed(200.Milliseconds()); 
 		}
 
 

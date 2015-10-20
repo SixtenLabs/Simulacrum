@@ -10,7 +10,7 @@
 		protected override void SetupSystemProperties()
 		{
 			Order = 20;
-			EntitySystemType = EntityProcessorType.Update;
+			EntityProcessorType = EntityProcessorType.Update;
 			Name = "Movement System";
 		}
 

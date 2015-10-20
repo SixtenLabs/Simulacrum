@@ -9,13 +9,6 @@ namespace SixtenLabs.Simulacrum
 			Elements = new T[initialSize];
 		}
 
-		private void Grow()
-		{
-			Grow((int)(Elements.Length * 1.5) + 1);
-		}
-
-		/// <summary>Grows the specified new capacity.</summary>
-		/// <param name="newCapacity">The new capacity.</param>
 		private void Grow(int newCapacity)
 		{
 			T[] oldElements = Elements;
@@ -23,9 +16,11 @@ namespace SixtenLabs.Simulacrum
 			Array.Copy(oldElements, 0, Elements, 0, oldElements.Length);
 		}
 
-		/// <summary>Returns the element at the specified position in Bag.</summary>
-		/// <param name="index">The index.</param>
-		/// <returns>The element from the specified position in Bag.</returns>
+		public void Delete(int index)
+		{
+			Elements[index] = default(T);
+		}
+
 		public T this[int index]
 		{
 			get

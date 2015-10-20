@@ -2,6 +2,7 @@
 using FluentAssertions;
 
 using SixtenLabs.Simulacrum.SampleImplementation;
+using System.Numerics;
 
 namespace SixtenLabs.Simulacrum.Tests
 {
@@ -37,6 +38,30 @@ namespace SixtenLabs.Simulacrum.Tests
 			var actual = subject.GetComponent<TransformComponent>();
 
 			actual.Should().NotBeNull();
+		}
+
+		[Fact]
+		public void DeleteComponentValues_Returns_xx()
+		{
+			var subject = NewSubjectUnderTest(4);
+
+			var transform = subject.GetComponent<TransformComponent>();
+			transform.Position[1] = Vector3.One;
+			transform.Orientation[1] = new Quaternion(Vector3.One, 3);
+
+			var velocity = subject.GetComponent<VelocityComponent>();
+			velocity.RunSpeed[1] = 4.0f;
+			velocity.TurnSpeed[1] = 5.0f;
+			velocity.CurrentMoveBy[1] = Vector3.One;
+ 
+			subject.DeleteComponentValues(1);
+
+			transform.Position[1].Should().Be(Vector3.Zero);
+			transform.Orientation[1].Should().Be(new Quaternion(0, 0, 0, 0));
+
+			velocity.RunSpeed[1].Should().Be(0.0f);
+			velocity.TurnSpeed[1].Should().Be(0.0f);
+			velocity.CurrentMoveBy[1].Should().Be(Vector3.Zero);
 		}
 	}
 }
