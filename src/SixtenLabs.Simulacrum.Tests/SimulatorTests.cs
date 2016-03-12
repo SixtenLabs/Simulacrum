@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using Xunit;
 using FluentAssertions;
 using NSubstitute;
-using SixtenLabs.Simulacrum.SampleImplementation.Simulators;
-using SixtenLabs.Simulacrum.SampleImplementation;
+
+using SixtenLabs.Simulacrum.ConsoleTest;
 
 namespace SixtenLabs.Simulacrum.Tests
 {
@@ -16,15 +12,18 @@ namespace SixtenLabs.Simulacrum.Tests
 	{
 		private IComponentManagerFactory ComponentManagerFactory { get; set; }
 
+		private IConsole MockConsole { get; set; }
+
 		public SimulatorTests()
 		{
 			ComponentManagerFactory = Substitute.For<IComponentManagerFactory>();
+			MockConsole = Substitute.For<IConsole>();
 			ComponentManagerFactory.CreateComponentManager().Returns(ComponentManager());
 		}
 
 		private LevelSimulator NewSubjectUnderTest()
 		{
-			var simulator = new LevelSimulator(ComponentManagerFactory);
+			var simulator = new LevelSimulator(ComponentManagerFactory, MockConsole);
 
 			return simulator;
 		}
@@ -35,6 +34,7 @@ namespace SixtenLabs.Simulacrum.Tests
 
 			components.Add(new TransformComponent());
 			components.Add(new VelocityComponent());
+			components.Add(new RenderComponent());
 
 			var manager = new ComponentManager(components);
 
@@ -54,7 +54,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			var subject = NewSubjectUnderTest();
 
-			subject.Name.Should().Be("Planet");
+			subject.Name.Should().Be("Level 1");
 		}
 
 		[Fact]
@@ -68,7 +68,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		}
 
 		[Fact]
-		public void GetCompoennt_Returns_Component()
+		public void GetComponent_Returns_Component()
 		{
 			var subject = NewSubjectUnderTest();
 

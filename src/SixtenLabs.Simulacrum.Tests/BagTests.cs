@@ -1,6 +1,4 @@
-﻿using System;
-
-using Xunit;
+﻿using Xunit;
 using FluentAssertions;
 
 namespace SixtenLabs.Simulacrum.Tests

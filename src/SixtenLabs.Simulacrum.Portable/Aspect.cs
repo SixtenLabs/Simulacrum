@@ -51,7 +51,7 @@ namespace SixtenLabs.Simulacrum
 		{
 			var tempSet = new Aspect(Masks.Length);
 
-			for (int i = 0; i < Masks.Count; i++)
+			for (int i = 0; i < Masks.Length; i++)
 			{
 				if (Masks[i] && (!(aspectToTest.Masks[i])))
 				{

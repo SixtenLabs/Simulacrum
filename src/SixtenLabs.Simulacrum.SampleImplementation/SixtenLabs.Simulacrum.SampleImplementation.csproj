@@ -59,17 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
+    <Compile Include="IConsole.cs" />
+    <Compile Include="Processors\InputProcessor.cs" />
     <Compile Include="Processors\MovementProcessor.cs" />
+    <Compile Include="Processors\RenderProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Simulators\LevelSimulator.cs" />
+    <Compile Include="WindowsConsole.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
-      <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
-      <Name>SixtenLabs.Simulacrum</Name>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum.Portable\SixtenLabs.Simulacrum.Portable.csproj">
+      <Project>{04e9aead-3483-4f41-8cbd-60a76a1816ac}</Project>
+      <Name>SixtenLabs.Simulacrum.Portable</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

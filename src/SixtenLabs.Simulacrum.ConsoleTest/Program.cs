@@ -1,12 +1,5 @@
 ﻿using SimpleInjector;
-using SixtenLabs.Simulacrum.SampleImplementation;
-using SixtenLabs.Simulacrum.SampleImplementation.Processors;
-using SixtenLabs.Simulacrum.SampleImplementation.Simulators;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SixtenLabs.Simulacrum.ConsoleTest
 {
@@ -15,27 +8,31 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 		static void Main(string[] args)
 		{
 			Bootstrap();
+
+			var game = Container.GetInstance<GameWindow>();
+
+			game.Run();
 		}
 
 		private static void RegisterComponents()
 		{
 			Container.Register<TransformComponent>();
 			Container.Register<VelocityComponent>();
-
-			Container.RegisterCollection<IComponent>(new[] { typeof(TransformComponent), typeof(VelocityComponent) });
+			Container.Register<RenderComponent>();
+			Container.RegisterCollection<IComponent>(new[] { typeof(TransformComponent), typeof(VelocityComponent), typeof(RenderComponent) });
 		}
 
 		private static void RegisterProcessors()
 		{
 			Container.RegisterSingleton<MovementProcessor>();
-
-			Container.RegisterCollection<IEntityProcessor>(new[] { typeof(MovementProcessor) });
+			Container.RegisterSingleton<RenderProcessor>();
+			Container.RegisterSingleton<InputProcessor>();
+			Container.RegisterCollection<IEntityProcessor>(new[] { typeof(MovementProcessor), typeof(RenderProcessor), typeof(InputProcessor) });
 		}
 
 		private static void RegisterSimulators()
 		{
 			Container.RegisterSingleton<LevelSimulator>();
-
 			Container.RegisterCollection<ISimulator>(new[] { typeof(LevelSimulator) });
 		}
 
@@ -43,12 +40,11 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 		{
 			Console.WriteLine("Bootstrap Started");
 
-			Container = new Container();
-
 			Container.RegisterSingleton<ISimulation, Simulation>();
-			//Container.Register<IComponentManager, ComponentManager>();
 			Container.RegisterSingleton<IComponentManagerFactory, ComponentManagerFactory>();
-			//Container.RegisterSingleton<ILog, ConsoleLog>();
+			Container.RegisterSingleton<IConsole, WindowsConsole>();
+
+			Container.RegisterSingleton<GameWindow>();
 
 			RegisterComponents();
 			RegisterProcessors();
@@ -57,10 +53,8 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			Container.Verify();
 
 			Console.WriteLine("Bootstrap Verified");
-
-			Console.ReadLine();
 		}
 
-		private static Container Container;
+		private static Container Container { get; } = new Container();
 	}
 }

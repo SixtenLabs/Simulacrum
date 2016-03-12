@@ -2,8 +2,7 @@
 
 using Xunit;
 using FluentAssertions;
-
-using SixtenLabs.Simulacrum.SampleImplementation;
+using SixtenLabs.Simulacrum.ConsoleTest;
 
 namespace SixtenLabs.Simulacrum.Tests
 {

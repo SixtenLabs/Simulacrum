@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SixtenLabs.Simulacrum.SampleImplementation.Simulators
+namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public class LevelSimulator : Simulator
 	{

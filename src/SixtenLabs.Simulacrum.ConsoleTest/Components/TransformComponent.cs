@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace SixtenLabs.Simulacrum.SampleImplementation
+﻿namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public sealed class TransformComponent : Component
 	{

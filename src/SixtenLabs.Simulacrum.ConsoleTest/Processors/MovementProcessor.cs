@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace SixtenLabs.Simulacrum.SampleImplementation.Processors
+namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public class MovementProcessor : EntityProcessor
 	{

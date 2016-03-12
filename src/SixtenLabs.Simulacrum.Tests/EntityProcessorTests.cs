@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using Xunit;
 using FluentAssertions;
 using NSubstitute;
 
-using SixtenLabs.Simulacrum.SampleImplementation.Processors;
-using SixtenLabs.Simulacrum.SampleImplementation;
+using SixtenLabs.Simulacrum.ConsoleTest;
 
 namespace SixtenLabs.Simulacrum.Tests
 {
@@ -62,15 +57,15 @@ namespace SixtenLabs.Simulacrum.Tests
 			// Do not have anything to test yet. Maybe when I add logging support.
 		}
 
-		[Fact]
-		public void Process_x_x()
-		{
-			var subject = NewSubjectUnderTest();
+		//[Fact]
+		//public void Process_x_x()
+		//{
+		//	var subject = NewSubjectUnderTest();
 
-			subject.Process(null, 1.0);
+		//	subject.Process(null, 1.0);
 
-			// Do not have anything to test yet. Maybe when I add logging support.
-		}
+		//	// Do not have anything to test yet. Maybe when I add logging support.
+		//}
 
 		[Fact]
 		public void Constructor_Order_IsSet()

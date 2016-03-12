@@ -31,7 +31,7 @@ namespace SixtenLabs.Simulacrum
 		public virtual void Load()
 		{
 			// TODO : Replace with logging
-			Console.WriteLine(string.Format("{0} - {1} Loaded.", Order, Name));
+			//Console.WriteLine(string.Format("{0} - {1} Loaded.", Order, Name));
 		}
 
 		protected IComponentManager ComponentManager { get; }

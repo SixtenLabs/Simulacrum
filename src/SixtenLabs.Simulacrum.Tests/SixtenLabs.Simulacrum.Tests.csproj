@@ -101,13 +101,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SixtenLabs.Simulacrum.SampleImplementation\SixtenLabs.Simulacrum.SampleImplementation.csproj">
-      <Project>{5e966d88-bb3c-4788-9aed-17b741c8214d}</Project>
-      <Name>SixtenLabs.Simulacrum.SampleImplementation</Name>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum.ConsoleTest\SixtenLabs.Simulacrum.ConsoleTest.csproj">
+      <Project>{5bfce6a7-5391-4174-9125-9f7824b99584}</Project>
+      <Name>SixtenLabs.Simulacrum.ConsoleTest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
-      <Project>{6209fc23-42f1-405a-80c1-2ea0f308360d}</Project>
-      <Name>SixtenLabs.Simulacrum</Name>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum.Portable\SixtenLabs.Simulacrum.Portable.csproj">
+      <Project>{04e9aead-3483-4f41-8cbd-60a76a1816ac}</Project>
+      <Name>SixtenLabs.Simulacrum.Portable</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

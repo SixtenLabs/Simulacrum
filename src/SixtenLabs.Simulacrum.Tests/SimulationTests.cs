@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xunit;
 using FluentAssertions;
 using NSubstitute;
-using SixtenLabs.Simulacrum.SampleImplementation;
+using SixtenLabs.Simulacrum.ConsoleTest;
 
 namespace SixtenLabs.Simulacrum.Tests
 {

@@ -1,4 +1,4 @@
-﻿namespace SixtenLabs.Simulacrum.SampleImplementation
+﻿namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public sealed class VelocityComponent : Component
 	{
