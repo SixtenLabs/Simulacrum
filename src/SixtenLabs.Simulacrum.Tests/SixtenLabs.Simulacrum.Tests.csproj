@@ -93,10 +93,14 @@
     <Compile Include="ComponentManagerTests.cs" />
     <Compile Include="EntityHandleTests.cs" />
     <Compile Include="EntityProcessorTests.cs" />
+    <Compile Include="Implementations\InputProcessor.cs" />
     <Compile Include="Implementations\LevelSimulator.cs" />
+    <Compile Include="Implementations\MovementProcessor.cs" />
     <Compile Include="Implementations\RenderComponent.cs" />
+    <Compile Include="Implementations\RenderProcessor.cs" />
     <Compile Include="Implementations\TransformComponent.cs" />
     <Compile Include="Implementations\UiComponent.cs" />
+    <Compile Include="Implementations\UiSimulator.cs" />
     <Compile Include="Implementations\VelocityComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulationTests.cs" />
