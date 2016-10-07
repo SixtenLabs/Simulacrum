@@ -8,8 +8,7 @@ namespace SixtenLabs.Simulacrum.SampleImplementation.Processors
 {
 	public class InputProcessor : EntityProcessor
 	{
-		public InputProcessor(IComponentManagerFactory componentManagerFactory)
-      : base(componentManagerFactory)
+		public InputProcessor()
     {
 		}
 
@@ -18,11 +17,6 @@ namespace SixtenLabs.Simulacrum.SampleImplementation.Processors
 			Order = 10;
 			EntityProcessorType = EntityProcessorType.Update;
 			Name = "Input System";
-		}
-
-		protected override void SetupComponentProperties()
-		{
-			VelocityComponent = ComponentManager.GetComponent<VelocityComponent>();
 		}
 
 		protected override void RegisterRequiredComponents()

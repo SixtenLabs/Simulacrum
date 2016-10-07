@@ -4,8 +4,7 @@ namespace SixtenLabs.Simulacrum.SampleImplementation.Processors
 {
 	public class MovementProcessor : EntityProcessor
 	{
-		public MovementProcessor(IComponentManagerFactory componentManagerFactory)
-      : base(componentManagerFactory)
+		public MovementProcessor()
     {
 		}
 
@@ -14,12 +13,6 @@ namespace SixtenLabs.Simulacrum.SampleImplementation.Processors
 			Order = 20;
 			EntityProcessorType = EntityProcessorType.Update;
 			Name = "Movement System";
-		}
-
-		protected override void SetupComponentProperties()
-		{
-			TransformComponent = ComponentManager.GetComponent<TransformComponent>();
-			VelocityComponent = ComponentManager.GetComponent<VelocityComponent>();
 		}
 
 		protected override void RegisterRequiredComponents()

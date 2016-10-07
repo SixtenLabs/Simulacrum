@@ -4,8 +4,7 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public class RenderProcessor : EntityProcessor
 	{
-		public RenderProcessor(IComponentManagerFactory componentManagerFactory)
-      : base(componentManagerFactory)
+		public RenderProcessor()
     {
 		}
 
@@ -14,12 +13,6 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			Order = 80;
 			EntityProcessorType = EntityProcessorType.Render;
 			Name = "Render System";
-		}
-
-		protected override void SetupComponentProperties()
-		{
-			RenderComponent = ComponentManager.GetComponent<RenderComponent>();
-			TransformComponent = ComponentManager.GetComponent<TransformComponent>();
 		}
 
 		protected override void RegisterRequiredComponents()
@@ -39,25 +32,24 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 
 		public override void Process(ISimulator simulator, double tick)
 		{
-			foreach (var handle in simulator.GetHandlesForProcessor(Aspect))
+      var transformComponent = simulator.GetComponent<TransformComponent>();
+      var renderComponent = simulator.GetComponent<RenderComponent>();
+
+      foreach (var handle in simulator.GetHandlesForProcessor(Aspect))
 			{
-				Console.BackgroundColor = RenderComponent.Color[handle.Index];
+				Console.BackgroundColor = renderComponent.Color[handle.Index];
 				Console.Clear();
 
-				var x = TransformComponent.X[handle.Index];
-				var y = TransformComponent.Y[handle.Index];
+				var x = transformComponent.X[handle.Index];
+				var y = transformComponent.Y[handle.Index];
 				Console.SetCursorPosition(x, y);
 
-				Console.Write(RenderComponent.Text[handle.Index]);
+				Console.Write(renderComponent.Text[handle.Index]);
 			}
 		}
 
 		public override void Dispose()
 		{
 		}
-
-		private RenderComponent RenderComponent { get; set; }
-
-		private TransformComponent TransformComponent { get; set; }
 	}
 }

@@ -8,8 +8,7 @@ namespace SixtenLabs.Simulacrum.SampleImplementation
 {
 	public class RenderProcessor : EntityProcessor
 	{
-		public RenderProcessor(IComponentManagerFactory componentManagerFactory)
-      : base(componentManagerFactory)
+		public RenderProcessor()
     {
 		}
 
@@ -18,12 +17,6 @@ namespace SixtenLabs.Simulacrum.SampleImplementation
 			Order = 80;
 			EntityProcessorType = EntityProcessorType.Render;
 			Name = "Render System";
-		}
-
-		protected override void SetupComponentProperties()
-		{
-			RenderComponent = ComponentManager.GetComponent<RenderComponent>();
-			TransformComponent = ComponentManager.GetComponent<TransformComponent>();
 		}
 
 		protected override void RegisterRequiredComponents()

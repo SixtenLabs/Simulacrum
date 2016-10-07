@@ -20,7 +20,7 @@ namespace SixtenLabs.Simulacrum.Tests
 
 		private MovementProcessor NewSubjectUnderTest()
 		{
-			var processor = new MovementProcessor(ComponentManagerFactory);
+			var processor = new MovementProcessor();
 
 			return processor;
 		}

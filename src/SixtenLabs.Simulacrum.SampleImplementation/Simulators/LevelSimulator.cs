@@ -47,6 +47,11 @@ namespace SixtenLabs.Simulacrum.SampleImplementation.Simulators
 			entity.Aspect.AddMask(velocityComponent.AspectMask);
 		}
 
-		private IConsole Console { get; }
+    protected override void RegisterComponentTypes()
+    {
+      throw new NotImplementedException();
+    }
+
+    private IConsole Console { get; }
 	}
 }

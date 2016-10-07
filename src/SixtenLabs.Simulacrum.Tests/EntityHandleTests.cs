@@ -53,7 +53,7 @@ namespace SixtenLabs.Simulacrum.Tests
 		{
 			for(int i = 0; i < count; i++)
 			{
-				NewSubjectUnderTest(Guid.NewGuid(), 1, 2);
+				NewSubjectUnderTest(Guid.NewGuid(), i, 2);
 			}
 		}
 

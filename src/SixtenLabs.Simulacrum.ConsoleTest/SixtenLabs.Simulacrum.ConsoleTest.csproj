@@ -70,6 +70,7 @@
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
+    <Compile Include="Core\ComponentFactory.cs" />
     <Compile Include="Core\IConsole.cs" />
     <Compile Include="Core\WindowsConsole.cs" />
     <Compile Include="Core\GameWindow.cs" />
@@ -85,12 +86,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SixtenLabs.Simulacrum.Portable\SixtenLabs.Simulacrum.Portable.csproj">
-      <Project>{04e9aead-3483-4f41-8cbd-60a76a1816ac}</Project>
-      <Name>SixtenLabs.Simulacrum.Portable</Name>
+    <ProjectReference Include="..\SixtenLabs.Simulacrum\SixtenLabs.Simulacrum.csproj">
+      <Project>{5cb73654-8588-4276-8cd0-93fe415b8ea6}</Project>
+      <Name>SixtenLabs.Simulacrum</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

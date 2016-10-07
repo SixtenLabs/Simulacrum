@@ -40,7 +40,8 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 		{
 			Console.WriteLine("Bootstrap Started");
 
-			Container.RegisterSingleton<ISimulation, Simulation>();
+      Container.RegisterSingleton<IComponentFactory, ComponentFactory>();
+      Container.RegisterSingleton<ISimulation, Simulation>();
 			Container.RegisterSingleton<IComponentManagerFactory, ComponentManagerFactory>();
 			Container.RegisterSingleton<IConsole, WindowsConsole>();
 

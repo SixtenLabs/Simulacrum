@@ -1,6 +1,6 @@
 ﻿namespace SixtenLabs.Simulacrum
 {
-	/// <summary>
+  /// <summary>
 	/// A component represents all the data for one aspect of an object.
 	/// No code is allowed in a component
 	///  
@@ -16,12 +16,14 @@
 	/// 
 	/// </summary>
 	public interface IComponent
-	{
-		/// <summary>
-		/// This is set by Simulation.cs when the component is registered.
-		/// </summary>
-		int AspectMask { get; set; }
+  {
+    /// <summary>
+    /// This is the index of the AspectMask for this component. This is used to test signatures for Processors
+    /// to know if this component is used by a processor.
+    /// This is set by the ComponentManager when the component is registered.
+    /// </summary>
+    int AspectMask { get; set; }
 
-		void Delete(int index);
-	}
+    void Delete(int index);
+  }
 }

@@ -4,8 +4,7 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 {
 	public class MovementProcessor : EntityProcessor
 	{
-		public MovementProcessor(IComponentManagerFactory componentManagerFactory)
-      : base(componentManagerFactory)
+		public MovementProcessor()
     {
 		}
 
@@ -14,12 +13,6 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			Order = 20;
 			EntityProcessorType = EntityProcessorType.Update;
 			Name = "Movement System";
-		}
-
-		protected override void SetupComponentProperties()
-		{
-			TransformComponent = ComponentManager.GetComponent<TransformComponent>();
-			VelocityComponent = ComponentManager.GetComponent<VelocityComponent>();
 		}
 
 		protected override void RegisterRequiredComponents()
@@ -39,18 +32,21 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 
 		public override void Process(ISimulator simulator, double tick)
 		{
-			foreach(var handle in simulator.GetHandlesForProcessor(Aspect))
+      var transformComponent = simulator.GetComponent<TransformComponent>();
+      var velocityComponent = simulator.GetComponent<VelocityComponent>();
+
+      foreach (var handle in simulator.GetHandlesForProcessor(Aspect))
 			{
-				if(VelocityComponent.MoveByX[handle.Index] != 0)
+				if(velocityComponent.MoveByX[handle.Index] != 0)
 				{
-					TransformComponent.X[handle.Index] += VelocityComponent.MoveByX[handle.Index];
-					VelocityComponent.MoveByX[handle.Index] = 0;
+          transformComponent.X[handle.Index] += velocityComponent.MoveByX[handle.Index];
+          velocityComponent.MoveByX[handle.Index] = 0;
 				}
 
-				if (VelocityComponent.MoveByY[handle.Index] != 0)
+				if (velocityComponent.MoveByY[handle.Index] != 0)
 				{
-					TransformComponent.Y[handle.Index] += VelocityComponent.MoveByY[handle.Index];
-					VelocityComponent.MoveByY[handle.Index] = 0;
+          transformComponent.Y[handle.Index] += velocityComponent.MoveByY[handle.Index];
+          velocityComponent.MoveByY[handle.Index] = 0;
 				}
 			}
 		}
@@ -58,9 +54,5 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 		public override void Dispose()
 		{
 		}
-
-		private TransformComponent TransformComponent { get; set; }
-
-		private VelocityComponent VelocityComponent { get; set; }
 	}
 }

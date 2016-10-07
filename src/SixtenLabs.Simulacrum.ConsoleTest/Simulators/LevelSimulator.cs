@@ -47,6 +47,13 @@ namespace SixtenLabs.Simulacrum.ConsoleTest
 			entity.Aspect.AddMask(velocityComponent.AspectMask);
 		}
 
-		private IConsole Console { get; }
+    protected override void RegisterComponentTypes()
+    {
+      RegisteredComponentTypes.Add(typeof(TransformComponent));
+      RegisteredComponentTypes.Add(typeof(VelocityComponent));
+      RegisteredComponentTypes.Add(typeof(RenderComponent));
+    }
+
+    private IConsole Console { get; }
 	}
 }
